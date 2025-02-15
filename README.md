@@ -27,8 +27,6 @@ A backend application that leverages AI tools to analyze a patient's medical his
    MONGO_URI, PORT, SESSION_KEY, JWT_SECRET_KEY, BUCKET_NAME, BUCKET_REGION, BUCKET_REGION1, AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, GEMINI_API_URL, GEMINI_API_KEY, ENCRYPTION_KEY
    ```
 
-- Please google on how to create and use your GEMINI API
-
 #### IMPORTANT NOTE
 
 I used two different AWS regions: one for my S3 bucket and another for my SNS topic, to enable the SMS feature. This was necessary because the S3 bucket was created in the Asia Pacific (Mumbai) region, and when I tried using the same region for the SNS topic, I wasn't able to send SMS messages. However, when I selected a different region for the SNS topic (Asia Pacific - Singapore), the SMS functionality worked.
@@ -147,6 +145,68 @@ To interact with the backend, you can use tools like **Postman** to send API req
   ```json
   { "message": "File deleted successfully" }
   ```
+
+# Third Party Solutions Setup Guide
+
+This guide walks you through the steps to set up and use third-party services such as the **Gemini API**, **AWS S3**, **AWS SNS**, and others. Follow the steps below to integrate these services into your project.
+
+## GEMINI API URL and KEY:
+
+1. Go to the [Gemini API documentation](https://ai.google.dev/gemini-api/docs/api-key).
+2. Click the button **"GET GEMINI API KEY in Google Studio"**.
+3. Click **"Create API Key"** to generate your API key.
+
+Once generated, make sure to save your API key securely, as you will need it for authentication in your project.
+
+---
+
+## AWS Account:
+
+1. If you don't have an AWS account, register or sign in at [AWS Sign-Up Page](https://aws.amazon.com/).
+2. Follow the instructions to complete the registration process.
+
+---
+
+## AWS S3 Bucket:
+
+### **Creating an S3 Bucket:**
+
+1. Go to the AWS S3 console: [AWS S3 Console](https://console.aws.amazon.com/s3/).
+2. Click on **Create Bucket**.
+3. Choose a unique bucket name and select a region (ensure the region supports SMS service like **Asia-Pacific-Singapore**).
+4. Set other properties as needed (you can leave the defaults if unsure).
+5. Click **Create** to create your S3 bucket.
+
+---
+
+## AWS IAM User and AWS SNS Service:
+
+For setting up AWS SNS and IAM users, refer to the detailed guide in the following article:  
+[Sending SMS using AWS SNS in Node.js](https://medium.com/@pkthakur01/sending-text-sms-using-aws-sns-in-node-js-d83d0764120e).
+
+This guide will walk you through creating IAM users and integrating SNS into your application for SMS sending.
+
+---
+
+## IAM Policies to Grant to IAM User:
+
+When setting up IAM users for your AWS services, you need to assign the following policies to grant access to specific services:
+
+1. **AmazonS3FullAccess**: Grants full access to manage your S3 buckets and objects.
+2. **AmazonSNSFullAccess**: Grants full access to manage SNS topics, subscriptions, and send messages.
+3. **AmazonTextractFullAccess**: Grants full access to use the AWS Textract service for document analysis (if applicable).
+
+---
+
+## Additional Notes:
+
+- **IAM User Access Keys**: Ensure that your IAM user has programmatic access enabled with the necessary **Access Key ID** and **Secret Access Key**.
+- **IAM Role**: If your solution requires multiple AWS services (e.g., SNS for SMS sending, S3 for file storage), create IAM roles with the appropriate permissions and assign them to your users or services.
+- **Region Availability**: When creating an S3 bucket or setting up SNS, be sure that the selected region supports the services you require (e.g., SMS services in specific regions like **Asia-Pacific-Singapore**).
+
+---
+
+By following this guide, you'll be able to integrate **Gemini API**, **AWS S3**, and **AWS SNS** into your application, allowing you to send SMS, store files in S3, and use AI features via Gemini API.
 
 ## DESIGN DECISIONS
 
