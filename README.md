@@ -6,7 +6,7 @@ A backend application that leverages AI tools to analyze a patient's medical his
 
 1. **Clone the repository:**
    ```sh
-   git clone <https://github.com/lalhriemsang/HealthSutraProject>
+   git clone https://github.com/lalhriemsang/HealthSutraProject.git
    ```
 2. **Navigate to the project directory:**
    ```sh
